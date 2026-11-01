@@ -1,38 +1,23 @@
+
 #include <stdio.h>
 
-/**
- * main - displays a calculator menu with choice validation
- *
- * Return: Always 0 (Success)
- */
 int main(void)
 {
-	int choice;
+    int choice, a, b;
 
-	printf("Simple Calculator\n");
+    printf("Choice: ");
+    scanf("%d", &choice);
 
-	while (1)
-	{
-		printf("1) Add\n");
-		printf("2) Subtract\n");
-		printf("3) Multiply\n");
-		printf("4) Divide\n");
-		printf("0) Quit\n");
-		printf("Choice: ");
+    if (choice == 1)
+    {
+        printf("A: ");
+        scanf("%d", &a);
 
-		if (scanf("%d", &choice) != 1)
-			return (0);
+        printf("B: ");
+        scanf("%d", &b);
 
-		if (choice == 0)
-		{
-			printf("Bye!\n");
-			break;
-		}
-		else if (choice < 1 || choice > 4)
-		{
-			printf("Invalid choice\n");
-		}
-	}
+        printf("Result: %d\n", a + b);
+    }
 
-	return (0);
+    return (0);
 }
