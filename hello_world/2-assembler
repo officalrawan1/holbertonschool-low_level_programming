@@ -1,2 +1,2 @@
-#!/bin/bash
-gcc -S "$CFILE" -o "${CFILE%.c}.s"
+git fetch origin
+git ls-tree origin/main hello_world/2-assembler
