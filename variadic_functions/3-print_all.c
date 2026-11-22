@@ -3,58 +3,55 @@
 #include "variadic_functions.h"
 
 /**
+ * print_string - prints a string
+ * @str: string to print
+ */
+static void print_string(char *str)
+{
+	if (str == NULL)
+	{
+		printf("(nil)");
+		return;
+	}
+	printf("%s", str);
+}
+
+/**
  * print_all - prints anything
  * @format: list of types of arguments
  */
 void print_all(const char * const format, ...)
 {
 	va_list args;
+	unsigned int i = 0;
 	int printed = 0;
-	int valid;
-	char *str;
 
 	va_start(args, format);
-
-	while (format && *format)
+	while (format && format[i])
 	{
-		valid = 0;
-
-		switch (*format)
+		if (printed)
+			printf(", ");
+		switch (format[i])
 		{
 		case 'c':
+			printf("%c", va_arg(args, int));
+			printed = 1;
+			break;
 		case 'i':
+			printf("%d", va_arg(args, int));
+			printed = 1;
+			break;
 		case 'f':
+			printf("%f", va_arg(args, double));
+			printed = 1;
+			break;
 		case 's':
-			valid = 1;
+			print_string(va_arg(args, char *));
+			printed = 1;
 			break;
 		}
-
-		if (valid)
-		{
-			printed && printf(", ");
-
-			switch (*format)
-			{
-			case 'c':
-				printf("%c", va_arg(args, int));
-				break;
-			case 'i':
-				printf("%d", va_arg(args, int));
-				break;
-			case 'f':
-				printf("%f", va_arg(args, double));
-				break;
-			case 's':
-				str = va_arg(args, char *);
-				str && printf("%s", str);
-				!str && printf("(nil)");
-				break;
-			}
-			printed = 1;
-		}
-		format++;
+		i++;
 	}
-
 	va_end(args);
 	printf("\n");
 }
